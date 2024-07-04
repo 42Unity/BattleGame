@@ -76,7 +76,25 @@ public class GameManager : MonoBehaviour
         Debug.Log(text);
     }
 
-    public void StartServer() { net.StartServer(); Destroy(selectModePanel.gameObject); Destroy(readyPanel.gameObject); }
-    public void StartClient() { net.StartClient(); Destroy(selectModePanel.gameObject); }
-    public void StartHost() { net.StartHost(); Destroy(selectModePanel.gameObject); }
+    public void StartServer()
+    {
+        net.StartServer();
+        Destroy(selectModePanel.gameObject);
+        Destroy(readyPanel.gameObject);
+        DebugLog("start server");
+    }
+    public void StartClient()
+    {
+        net.StartClient();
+        Destroy(selectModePanel.gameObject);
+        SetReadyStatus(false);
+        DebugLog("start client");
+    }
+    public void StartHost()
+    {
+        net.StartHost();
+        Destroy(selectModePanel.gameObject);
+        SetReadyStatus(false);
+        DebugLog("start host");
+    }
 }
