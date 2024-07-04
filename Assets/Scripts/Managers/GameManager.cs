@@ -4,7 +4,8 @@ using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+[RequireComponent(typeof(NetworkObject))]
+public class GameManager : NetworkBehaviour
 {
     [SerializeField] private NetworkManager net;
     [SerializeField] private TextMeshProUGUI readyStatusText;
@@ -14,12 +15,12 @@ public class GameManager : MonoBehaviour
     private bool myReadyStatus;
 
     [Rpc(SendTo.Server)]
-    private void Ready()
+    private void ReadyRpc()
     {
         DebugLog("server: recive ready command");
         if (IsAllClientReady())
         {
-            StartGame();
+            StartGameRpc();
         }
     }
 
@@ -29,13 +30,13 @@ public class GameManager : MonoBehaviour
     }
 
     [Rpc(SendTo.Server)]
-    private void CancelReady()
+    private void CancelReadyRpc()
     {
         DebugLog("server: recive cancel ready command");
     }
 
     [Rpc(SendTo.Everyone)]
-    private void StartGame()
+    private void StartGameRpc()
     {
         DebugLog("server -> client: start game");
     }
@@ -45,12 +46,12 @@ public class GameManager : MonoBehaviour
         if (myReadyStatus)
         {
             DebugLog("client: cancel ready");
-            CancelReady();
+            CancelReadyRpc();
         }
         else
         {
             DebugLog("client: ready");
-            Ready();
+            ReadyRpc();
         }
         SetReadyStatus(!myReadyStatus);
     }
