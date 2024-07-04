@@ -65,8 +65,8 @@
 
 <table>
   <tr>
-    <th>Backend</th>
-    <th>Frontend</th>
+    <th>1</th>
+    <th>2</th>
   </tr>
   <tr>
     <td>
