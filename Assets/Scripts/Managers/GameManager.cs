@@ -4,12 +4,11 @@ using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 
-public class GameManager : NetworkBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField] private NetworkManager net;
     [SerializeField] private TextMeshProUGUI readyStatusText;
-    [SerializeField] private RectTransform selectModePanel;
-    [SerializeField] private RectTransform readyPanel;
+
     private bool myReadyStatus;
 
     [Rpc(SendTo.Server)]
@@ -50,7 +49,7 @@ public class GameManager : NetworkBehaviour
         SetReadyStatus(!myReadyStatus);
     }
 
-    private void SetReadyStatus(bool ready)
+    public void SetReadyStatus(bool ready)
     {
         myReadyStatus = ready;
         if (ready)
@@ -63,27 +62,5 @@ public class GameManager : NetworkBehaviour
             readyStatusText.text = "Not Ready...";
             readyStatusText.color = Color.red;
         }
-    }
-
-    public void StartServer()
-    {
-        net.StartServer();
-        Destroy(selectModePanel.gameObject);
-        Destroy(readyPanel.gameObject);
-        DebugLog.Print("start server");
-    }
-    public void StartClient()
-    {
-        net.StartClient();
-        Destroy(selectModePanel.gameObject);
-        SetReadyStatus(false);
-        DebugLog.Print("start client");
-    }
-    public void StartHost()
-    {
-        net.StartHost();
-        Destroy(selectModePanel.gameObject);
-        SetReadyStatus(false);
-        DebugLog.Print("start host");
     }
 }

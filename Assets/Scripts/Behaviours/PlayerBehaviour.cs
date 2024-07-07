@@ -2,6 +2,9 @@ using Unity.Netcode;
 using UnityEngine;
 
 [RequireComponent(typeof(NetworkObject))]
-public class PlayerController : NetworkBehaviour
+public class PlayerBehaviour : NetworkBehaviour
 {
+    private void Awake()
+    {
+    }
 }
