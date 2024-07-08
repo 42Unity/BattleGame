@@ -15,10 +15,12 @@ public class NetworkModePopup : MonoBehaviour
     public void StartHost()
     {
         net.StartHost();
+        NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
     }
 
     public void StartClient()
     {
         net.StartClient();
+        NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
     }
 }
