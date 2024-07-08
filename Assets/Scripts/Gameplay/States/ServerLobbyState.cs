@@ -67,9 +67,10 @@ namespace BattleGame.Gameplay.State
                 clientId = clientId,
                 ready = ready,
             };
-            if (IsAllReady() && NetworkManager.Singleton.IsServer)
+            if (IsAllReady())
             {
-                NetworkManager.Singleton.SceneManager.LoadScene("Gameplay", LoadSceneMode.Single);
+                if (NetworkManager.Singleton.IsServer) StartCoroutine(NextScene());
+                else Debug.Log("Not server");
             }
         }
 
@@ -92,6 +93,12 @@ namespace BattleGame.Gameplay.State
                 if (!player.ready) return false;
             }
             return true;
+        }
+
+        IEnumerator NextScene()
+        {
+            yield return new WaitForSeconds(0.3f);
+            NetworkManager.Singleton.SceneManager.LoadScene("Gameplay", LoadSceneMode.Single);
         }
     }
 }

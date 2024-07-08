@@ -21,6 +21,5 @@ public class NetworkModePopup : MonoBehaviour
     public void StartClient()
     {
         net.StartClient();
-        NetworkManager.Singleton.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
     }
 }
