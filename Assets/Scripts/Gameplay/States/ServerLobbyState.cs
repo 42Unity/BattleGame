@@ -27,7 +27,7 @@ namespace BattleGame.Gameplay.State
         {
             if (!NetworkManager.Singleton.IsServer)
             {
-                enabled = true;
+                enabled = false;
             }
             else
             {
@@ -38,7 +38,7 @@ namespace BattleGame.Gameplay.State
 
         private void OnSceneEvent(SceneEvent sceneEvent)
         {
-            if (sceneEvent.SceneEventType == SceneEventType.LoadComplete && sceneEvent.SceneName == "Lobby")
+            if (sceneEvent.SceneEventType == SceneEventType.LoadComplete)
             {
                 networkReadyState.LobbyPlayers.Add(new NetworkReadyState.LobbyPlayerState()
                 {
@@ -51,6 +51,7 @@ namespace BattleGame.Gameplay.State
         public void OnNetworkDespawn()
         {
             networkReadyState.OnClientReady -= OnClientReady;
+            NetworkManager.Singleton.SceneManager.OnSceneEvent -= OnSceneEvent;
         }
 
         public void OnClientReady(ulong clientId, bool ready)
@@ -66,7 +67,7 @@ namespace BattleGame.Gameplay.State
                 clientId = clientId,
                 ready = ready,
             };
-            if (IsAllReady())
+            if (IsAllReady() && NetworkManager.Singleton.IsServer)
             {
                 NetworkManager.Singleton.SceneManager.LoadScene("Gameplay", LoadSceneMode.Single);
             }
