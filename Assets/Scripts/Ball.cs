@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Fusion;
 using UnityEngine;
 
-public class Ball : MonoBehaviour
+public class Ball : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Networked] private TickTimer life { get; set; }
+
+    public void Init()
     {
-        
+        life = TickTimer.CreateFromSeconds(Runner, 5f);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void FixedUpdateNetwork()
     {
-        
+
+        if (life.Expired(Runner)) Runner.Despawn(Object);
+        else transform.position += 5 * Runner.DeltaTime * transform.forward;
     }
+
 }
