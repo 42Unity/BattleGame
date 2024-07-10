@@ -1,4 +1,5 @@
 using Fusion;
+using TMPro;
 using UnityEngine;
 
 public class Player : NetworkBehaviour
@@ -14,6 +15,30 @@ public class Player : NetworkBehaviour
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
         _material = GetComponentInChildren<MeshRenderer>().material;
+    }
+
+    public void Update()
+    {
+        if (Object.HasInputAuthority && Input.GetKeyDown(KeyCode.R))
+        {
+            RPC_SendMessage("Hey Mete!");
+        }
+    }
+
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, HostMode = RpcHostMode.SourceIsHostPlayer)]
+    public void RPC_SendMessage(string message, RpcInfo info = default)
+    {
+        RPC_RelayMessage(message, info.Source);
+    }
+
+    private TMP_Text _messages;
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All, HostMode = RpcHostMode.SourceIsServer)]
+    public void RPC_RelayMessage(string message, PlayerRef messageSource)
+    {
+        if (_messages == null) _messages = FindObjectOfType<TMP_Text>();
+        if (messageSource == Runner.LocalPlayer) message = $"You said: {message}";
+        else message = $"Player {messageSource.PlayerId} said: {message}";
+        _messages.text = message;
     }
 
     public override void Render()
