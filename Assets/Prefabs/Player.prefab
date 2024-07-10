@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -195,3 +195,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefabBall: {fileID: 4208383397450312649, guid: 2480f3629654a97489d016c2b004e949, type: 3}
+  _prefabPhysxBall: {fileID: 8040840888891261206, guid: 0563639dfe5f14f4099cbfb9b2e01163, type: 3}
+  _spawnedProjectile: 0
+  _material: {fileID: 0}
