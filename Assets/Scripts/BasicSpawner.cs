@@ -88,14 +88,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
-        var data = new InputData();
-
-        data.Buttons.Set(InputButton.UP, Input.GetKey(KeyCode.W));
-        data.Buttons.Set(InputButton.DOWN, Input.GetKey(KeyCode.S));
-        data.Buttons.Set(InputButton.LEFT, Input.GetKey(KeyCode.A));
-        data.Buttons.Set(InputButton.RIGHT, Input.GetKey(KeyCode.D));
-
-        input.Set(data);
     }
 
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
