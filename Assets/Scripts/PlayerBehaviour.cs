@@ -1,5 +1,13 @@
-using Fusion;
+using BattleGame.Model;
 
-public class PlayerBehaviour : NetworkBehaviour
+namespace BattleGame
 {
+    public class PlayerBehaviour : CharacterBehaviour
+    {
+        public Player Player
+        {
+            get => Character as Player;
+            set => Character = value;
+        }
+    }
 }

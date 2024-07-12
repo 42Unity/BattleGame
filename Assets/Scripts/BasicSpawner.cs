@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using BattleGame;
+using BattleGame.Model;
 using Fusion;
 using Fusion.Addons.Physics;
 using Fusion.Sockets;
@@ -63,6 +65,9 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             // Create a unique position for the player
             Vector3 spawnPosition = Vector3.zero;
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+            var playerPrototype = ResourceManager.Instance.defaultPlayerPrototype;
+            var playerModel = Player.Create(playerPrototype);
+            networkPlayerObject.GetComponent<CharacterBehaviour>().Character = playerModel;
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
         }
