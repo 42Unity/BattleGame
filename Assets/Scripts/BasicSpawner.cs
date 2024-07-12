@@ -88,14 +88,12 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
-        var data = new NetworkInputData();
+        var data = new InputData();
 
-        if (Input.GetKey(KeyCode.W)) data.direction += Vector2.up;
-        if (Input.GetKey(KeyCode.S)) data.direction += Vector2.down;
-        if (Input.GetKey(KeyCode.A)) data.direction += Vector2.left;
-        if (Input.GetKey(KeyCode.D)) data.direction += Vector2.right;
-
-        data.direction.Normalize();
+        data.Buttons.Set(InputButton.UP, Input.GetKey(KeyCode.W));
+        data.Buttons.Set(InputButton.DOWN, Input.GetKey(KeyCode.S));
+        data.Buttons.Set(InputButton.LEFT, Input.GetKey(KeyCode.A));
+        data.Buttons.Set(InputButton.RIGHT, Input.GetKey(KeyCode.D));
 
         input.Set(data);
     }
