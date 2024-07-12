@@ -17,6 +17,7 @@ namespace BattleGame.Model
                 Prototype = prototype,
 
                 // character properties
+                Position = default,
                 AttackType = prototype.attackType,
                 AttackDamage = prototype.attackDamage,
                 AttackSpeed = prototype.attackSpeed,

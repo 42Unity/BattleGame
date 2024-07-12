@@ -1,9 +1,11 @@
 using BattleGame.Prototype;
+using UnityEngine;
 
 namespace BattleGame.Model
 {
     public abstract class Character : Object
     {
+        public Vector3 Position { get; set; }
         public AttackType AttackType { get; set; }
         public bool IsDead { get; set; }
         public float AttackDamage { get; set; }
