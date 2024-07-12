@@ -1,6 +1,5 @@
 using Fusion;
 
-public class Player : NetworkBehaviour
+public class PlayerBehaviour : NetworkBehaviour
 {
-
 }
