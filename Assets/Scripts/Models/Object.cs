@@ -1,7 +1,8 @@
 namespace BattleGame.Model
 {
-    public class Object
+    public abstract class Object
     {
-        public int InstanceId { get; set; }
+        public static int NextInstanceId = 0;
+        public int InstanceId { get; set; } = NextInstanceId++;
     }
 }

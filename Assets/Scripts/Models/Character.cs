@@ -1,14 +1,11 @@
+using BattleGame.Prototype;
+
 namespace BattleGame.Model
 {
-    public enum AttackType
-    {
-        Melee = 0,
-        Ranged = 1,
-    }
-
-    public class Character : Object
+    public abstract class Character : Object
     {
         public AttackType AttackType { get; set; }
+        public bool IsDead { get; set; }
         public float AttackDamage { get; set; }
         public float AttackSpeed { get; set; } // attacks per second
         public float AttackRange { get; set; }
