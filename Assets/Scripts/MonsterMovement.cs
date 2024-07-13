@@ -1,5 +1,3 @@
-using Fusion;
-
 namespace BattleGame
 {
     public class MonsterMovement : CharacterMovement
@@ -7,7 +5,6 @@ namespace BattleGame
         public override void FixedUpdateNetwork()
         {
             // TODO: implement monster movement
-            base.FixedUpdateNetwork();
         }
     }
 }

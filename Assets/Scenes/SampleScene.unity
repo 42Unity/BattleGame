@@ -168,6 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143ac258e48c341e7b50704ecbabdef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _monsterPrefab:
+    RawGuidValue: 89ae2d7b4c52f7544b6d51063c85a2ab
   _playerPrefab:
     RawGuidValue: 73de16868afe72447912dd3f10f6e673
 --- !u!114 &88139224
