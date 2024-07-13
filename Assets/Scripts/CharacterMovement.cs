@@ -9,7 +9,7 @@ namespace BattleGame
     public abstract class CharacterMovement : NetworkBehaviour
     {
         [SerializeField] private CharacterBehaviour characterBehaviour;
-        protected Character Player => characterBehaviour.Character;
+        protected Character Character => characterBehaviour.Character;
         [Networked] private Vector2 Position { get; set; }
         protected NetworkRigidbody2D rigid;
 
@@ -23,14 +23,14 @@ namespace BattleGame
         }
         private void SetPosition(Vector2 position)
         {
-            Player.Position = position;
+            Character.Position = position;
             Position = position;
         }
 
         public void Move(Vector2 direction)
         {
             var currentPos = rigid.Rigidbody.position;
-            var velocity = direction.normalized * Player.MovementSpeed;
+            var velocity = direction.normalized * Character.MovementSpeed;
             var newPos = Runner.DeltaTime * velocity + currentPos;
             SetPosition(newPos);
         }
