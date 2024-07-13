@@ -405,6 +405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultPlayerPrototype: {fileID: 11400000, guid: e9cabcbd7c4f9684e902f9344fc3d78d, type: 2}
   defaultMonsterPrototype: {fileID: 11400000, guid: 740f503bf69aa804fb3ee46194ac4c29, type: 2}
+  defaultWeaponPrototype: {fileID: 11400000, guid: 94bd8632890e9d04990783ac7f59b7e6, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
