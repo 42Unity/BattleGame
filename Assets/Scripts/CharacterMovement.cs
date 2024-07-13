@@ -21,8 +21,7 @@ namespace BattleGame
             }
             rigid = GetComponent<NetworkRigidbody2D>();
         }
-
-        public void Teleport(Vector3 position)
+        private void SetPosition(Vector2 position)
         {
             Player.Position = position;
             Position = position;
@@ -33,7 +32,7 @@ namespace BattleGame
             var currentPos = rigid.Rigidbody.position;
             var velocity = direction.normalized * Player.MovementSpeed;
             var newPos = Runner.DeltaTime * velocity + currentPos;
-            Teleport(newPos);
+            SetPosition(newPos);
         }
 
         public override void FixedUpdateNetwork()

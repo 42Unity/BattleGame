@@ -18,7 +18,7 @@ namespace BattleGame
             base.Spawned();
             if (Runner.IsServer)
             {
-                PrototypeId = ResourceManager.Instance.defaultMonsterPrototype.GetId();
+                PrototypeId = Monster.Prototype.GetId();
             }
             if (Runner.IsClient)
             {
