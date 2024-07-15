@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3539928654939318373}
   - component: {fileID: 4791315002163974897}
-  - component: {fileID: 5350865161758951071}
+  - component: {fileID: 8729817078999540013}
   - component: {fileID: 6707218927718845339}
-  - component: {fileID: 5333259265299027434}
+  - component: {fileID: 1831156663214335612}
   - component: {fileID: 953068445144825557}
   - component: {fileID: 3107296812150726170}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,15 +50,15 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 2616017846
+  SortKey: 311874574
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 5350865161758951071}
-  - {fileID: 5333259265299027434}
+  - {fileID: 8729817078999540013}
+  - {fileID: 1831156663214335612}
   - {fileID: 953068445144825557}
---- !u!114 &5350865161758951071
+--- !u!114 &8729817078999540013
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1548486153662642857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed3eaeee81d5c4f2cb805f241931167b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f4b5598120352045ac46510b4aa29c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!50 &6707218927718845339
@@ -97,7 +97,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5333259265299027434
+--- !u!114 &1831156663214335612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,10 +106,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1548486153662642857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1553e107829c1f4687960db550f52c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b4184cb74e0f0d4bb990b364d586344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterBehaviour: {fileID: 5350865161758951071}
+  characterBehaviour: {fileID: 8729817078999540013}
+  monsterBehaviour: {fileID: 8729817078999540013}
 --- !u!114 &953068445144825557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +242,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.49803922, b: 0.49803922, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

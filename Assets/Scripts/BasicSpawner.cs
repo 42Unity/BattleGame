@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using BattleGame;
+using BattleGame.Model;
 using Fusion;
 using Fusion.Addons.Physics;
 using Fusion.Sockets;
@@ -9,6 +11,7 @@ using UnityEngine.SceneManagement;
 
 public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
+    public static CharacterService characterService = new();
     private NetworkRunner _runner;
 
     private void OnGUI()
@@ -50,7 +53,38 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             Scene = scene,
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
         });
+
+        // Spawn a monster for testing
+        if (_runner.IsServer)
+        {
+            SpawnMonsters();
+        }
     }
+
+
+    // Monster spawning for test
+    [SerializeField] private NetworkPrefabRef _monsterPrefab;
+    private void SpawnMonsters()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            var randomX = UnityEngine.Random.Range(-10, 10);
+            var randomY = UnityEngine.Random.Range(-10, 10);
+            Vector3 spawnPosition = new(randomX, randomY, 0);
+            NetworkObject networkMonsterObject = _runner.Spawn(
+                _monsterPrefab,
+                spawnPosition,
+                Quaternion.identity,
+                onBeforeSpawned: (runner, monster) =>
+                {
+                    var monsterPrototype = ResourceManager.Instance.defaultMonsterPrototype;
+                    var monsterModel = Monster.Create(monsterPrototype);
+                    monsterModel.Position = spawnPosition;
+                    monster.GetComponent<MonsterBehaviour>().Monster = monsterModel;
+                });
+        }
+    }
+
 
     [SerializeField]
     private NetworkPrefabRef _playerPrefab; // Character to spawn for a joining player
@@ -62,7 +96,18 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         {
             // Create a unique position for the player
             Vector3 spawnPosition = Vector3.zero;
-            NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+            NetworkObject networkPlayerObject = runner.Spawn(
+                _playerPrefab,
+                spawnPosition,
+                Quaternion.identity,
+                player,
+                onBeforeSpawned: (runner, player) =>
+                {
+                    var playerPrototype = ResourceManager.Instance.defaultPlayerPrototype;
+                    var playerModel = Player.Create(playerPrototype);
+                    player.GetComponent<PlayerBehaviour>().Character = playerModel;
+                    characterService.AddPlayer(playerModel);
+                });
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
         }
@@ -88,16 +133,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
-        var data = new NetworkInputData();
-
-        if (Input.GetKey(KeyCode.W)) data.direction += Vector2.up;
-        if (Input.GetKey(KeyCode.S)) data.direction += Vector2.down;
-        if (Input.GetKey(KeyCode.A)) data.direction += Vector2.left;
-        if (Input.GetKey(KeyCode.D)) data.direction += Vector2.right;
-
-        data.direction.Normalize();
-
-        input.Set(data);
     }
 
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
