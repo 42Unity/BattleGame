@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterBehaviour: {fileID: 8729817078999540013}
+  monsterBehaviour: {fileID: 8729817078999540013}
 --- !u!114 &953068445144825557
 MonoBehaviour:
   m_ObjectHideFlags: 0

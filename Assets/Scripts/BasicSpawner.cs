@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 
 public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
+    public static CharacterService characterService = new();
     private NetworkRunner _runner;
 
     private void OnGUI()
@@ -78,6 +79,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
                 {
                     var monsterPrototype = ResourceManager.Instance.defaultMonsterPrototype;
                     var monsterModel = Monster.Create(monsterPrototype);
+                    monsterModel.Position = spawnPosition;
                     monster.GetComponent<MonsterBehaviour>().Monster = monsterModel;
                 });
         }
@@ -104,6 +106,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
                     var playerPrototype = ResourceManager.Instance.defaultPlayerPrototype;
                     var playerModel = Player.Create(playerPrototype);
                     player.GetComponent<PlayerBehaviour>().Character = playerModel;
+                    characterService.AddPlayer(playerModel);
                 });
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);

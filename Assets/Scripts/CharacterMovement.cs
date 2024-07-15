@@ -1,3 +1,4 @@
+using System;
 using BattleGame.Model;
 using Fusion;
 using Fusion.Addons.Physics;
@@ -13,14 +14,21 @@ namespace BattleGame
         [Networked] private Vector2 Position { get; set; }
         protected NetworkRigidbody2D rigid;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (characterBehaviour == null)
             {
                 characterBehaviour = GetComponent<CharacterBehaviour>();
             }
+            characterBehaviour.OnSpawned += Spawned;
             rigid = GetComponent<NetworkRigidbody2D>();
         }
+
+        private void Spawned(Character character)
+        {
+            if (HasStateAuthority) SetPosition(character.Position);
+        }
+
         private void SetPosition(Vector2 position)
         {
             Character.Position = position;

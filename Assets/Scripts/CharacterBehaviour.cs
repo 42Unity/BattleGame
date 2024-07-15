@@ -10,9 +10,9 @@ namespace BattleGame
 
         protected void SpawnComplete()
         {
-            OnSpawn?.Invoke(Character);
+            OnSpawned?.Invoke(Character);
         }
 
-        public event Action<Character> OnSpawn;
+        public event Action<Character> OnSpawned;
     }
 }

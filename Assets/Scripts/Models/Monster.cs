@@ -8,6 +8,8 @@ namespace BattleGame.Model
         public MonsterPrototype Prototype { get; set; }
         public float TraceDistance { get; set; }
         public Vector3 StartPosition { get; set; }
+        public State CurrentState { get; set; }
+        public Character TraceTarget { get; set; }
 
         public static Monster Create(MonsterPrototype prototype)
         {
@@ -31,6 +33,14 @@ namespace BattleGame.Model
                 // monster properties
                 TraceDistance = prototype.traceDistance,
             };
+        }
+
+        public enum State
+        {
+            Idle,
+            Trace,
+            Back,
+            Dead
         }
     }
 }
